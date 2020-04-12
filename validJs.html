@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Project</title>
+    <style>
+        .login_box{
+            padding: 40px;
+            border-radius: 10px;
+            background-color: rgba(224, 213, 213, 0.952);
+            position: absolute;
+            top: 120px;
+            left: 250px;
+            opacity: 0.6;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        label{
+            width: 150px;
+            display: inline-block;
+
+        }
+        .login_box input{
+            width: 250px;
+            border-radius: 4px;
+            padding: 4px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        body{
+            background-image: url(th.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .sign{
+            position: relative;
+            left: 70px;
+            font-size: 15px;
+            font-weight: bolder;
+            font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif ;
+        }
+        .val_error{
+            color: #FF1F1F;
+        }
+    
+
+    </style>
+
+</head>
+<body>
+    <div class="login_box">
+        <div class="sign">
+            <h1>Sign up</h1><br>
+        </div>
+
+        <form method="POST" onsubmit="return validate();" action="login.html" name="vform">
+            <div>
+                <label for="first">First Name</label><br>
+                <input type="text"  name="first" class="textinput" placeholder="First Name"><br>
+                <div id="first_error" class="val_error"></div>
+            </div>
+            <div>
+                <label for="last"> Last Name</label><br>
+                <input type="text" name="last" class="textinput" placeholder="Last Name"><br>
+                <div id="last_error" class="val_error"></div>
+            </div>
+            <div>
+                <label for="email">Email id</label><br>
+                <input type="text" name="email" class="textinput" placeholder="email id"><br>
+                <div id="email_error" class="val_error"></div>
+            </div>
+            <div>
+                <label for="phone">Mobile</label><br>
+                <input type="text" name="phone" class="textinput" placeholder="Mobile no"><br>
+                <div id="phone_error" class="val_error"></div>
+            </div>
+            <div>
+                <label for="password">Password</label><br>
+                <input type="password" name="password" class="textinput" placeholder="Password"><br>
+                <div id="password_error" class="val_error"></div>
+            </div>  
+            <div>
+                <label for="confirm">Confirm Password</label><br>
+                <input type="password" name="confirm" class="textinput" placeholder="Confirm password"><br>
+                <div id="confirm_error" class="val_error"></div>
+            </div>
+            <div >
+                <br>
+                <input type="submit" value="Sign up" class="btn" name="register">                
+
+            </div>
+
+        </form>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    var first=document.forms["vform"]["first"];
+    var last=document.forms["vform"]["last"];
+    var email=document.forms["vform"]["email"];
+    var phone=document.forms["vform"]["phone"];
+    var password=document.forms["vform"]["password"];
+    var confirm=document.forms["vform"]["confirm"];
+
+    var first_error=document.getElementById("first_error");
+    var last_error=document.getElementById("last_error");
+    var email_error=document.getElementById("email_error");
+    var phone_error=document.getElementById("phone_error");
+    var password_error=document.getElementById("password_error");
+    var confirm_error=document.getElementById("confirm_error");
+
+    first.addEventListener("blur",firstVerify,true);
+    last.addEventListener("blur",lastVerify,true);
+    email.addEventListener("blur",emailVerify,true);
+    phone.addEventListener("blur",phoneVerify,true);
+    password.addEventListener("blur",passwordVerify,true);
+
+
+    function validate()
+    {
+        if(first.value == ""){
+            first.style.border="1.5px solid red";
+            first_error.textContent="First Name is required";
+            first.focus();
+            return false;
+        }
+        if(last.value==""){
+            last.style.border="1.5px solid red";
+            last_error.textContent="Last Name is required";
+            last.focus();
+            return false;
+        }
+        if(email.value==""){
+            email.style.border="1.5px solid red";
+            email_error.textContent="email id is required";
+            email.focus();
+            return false;
+        }
+
+        if(phone.value.length!=10){
+            phone.style.border="1.5px solid red";
+            phone_error.textContent="Should contain 10 digit";
+            phone.focus();
+            return false;
+        }
+
+        if(password.value.length<8){
+            password.style.border="1.5px solid red";
+            password_error.textContent="Password must contain 8 characters";
+            password.focus();
+            return false;
+        }
+        if(password.value != confirm.value){
+            password.style.border="1.5px solid red";
+            confirm.style.border="1.5px solid red";
+            confirm_error.innerHTML="The two password does not match";
+            return false;
+        }
+
+    }
+    function firstVerify()
+    {
+        if(first.value != ""){
+            first.style.border="1.5px solid #5E6E66";
+            first_error.innerHTML="";
+            return true;
+        }
+    }
+    function lastVerify()
+    {
+        if(last.value != ""){
+            last.style.border="1.5px solid #5E6E66";
+            last_error.innerHTML="";
+            return true;
+        }
+    }
+    function emailVerify()
+    {
+        if(email.value != ""){
+            email.style.border="1.5px solid #5E6E66";
+            email_error.innerHTML="";
+            return true;
+        }  
+
+    }    
+    function phoneVerify()
+    {
+        if(phone.value != ""){
+            phone.style.border="1.5px solid #5E6E66";
+            phone_error.innerHTML="";
+            return true;
+        }
+
+    }
+    function passwordVerify()
+    {
+        if(password.value != ""){
+            password.style.border="1.5px solid #5E6E66";
+            password_error.innerHTML="";
+            return true;
+        }
+    }
+</script>
